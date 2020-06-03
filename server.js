@@ -1,7 +1,11 @@
 const express = require('express');
 const chalk = require('chalk');
+const morgan = require('morgan');
+const debug = require('debug')('PMU_debugger');
 
 const app = express();
+
+app.use(morgan('dev'));
 
 const port = 3000;
 
