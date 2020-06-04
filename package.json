@@ -4,7 +4,8 @@
   "description": "Exercise files for my course Building a Website with Node.js and Express",
   "main": "server.js",
   "scripts": {
-    "start": "DEBUG=* nodemon server.js"
+    "start": "DEBUG=* nodemon server.js",
+    "dev": "nodemon --ignore feedback.json server.js"
   },
   "keywords": [],
   "author": "Daniel Khan",
