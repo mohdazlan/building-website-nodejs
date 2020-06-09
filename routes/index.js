@@ -1,6 +1,9 @@
 
 const express = require('express');
 
+const speakersRoute = require('./speakers');
+const feedbackRoute = require('./feedback');
+
 const router = express.Router();
 
 router.get('/', (req, res) => {
@@ -15,9 +18,12 @@ module.exports = () => {
     res.sendFile(path.join(__dirname, './static/index.html'));
   });
 
-  router.get('/speakers', (req, res) => {
-    res.sendFile(path.join(__dirname, './static/speakers.html'));
-  });
+  //   router.get('/speakers', (req, res) => {
+  //     res.sendFile(path.join(__dirname, './static/speakers.html'));
+  //   });
+
+  router.use('/speakers', speakersRoute());
+  router.use('/feedback', feedbackRoute());
 
   return router;
 };
