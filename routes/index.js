@@ -6,24 +6,21 @@ const feedbackRoute = require('./feedback');
 
 const router = express.Router();
 
-router.get('/', (req, res) => {
-  res.render('pages/index', { pageTitle: 'Welcome' });
-});
 
-
-module.exports = () => {
+module.exports = (params) => {
   router.get('/', (req, res) => {
-    // use ctrl+cmd+space to insert emoji
-    // res.send('Hello Express 😃');
-    res.sendFile(path.join(__dirname, './static/index.html'));
+  
+    if (!req.session.visitcount) {
+      req.session.visitcount = 0;
+    }
+    req.session.visitcount += 1;
+    console.log(`Number of visits: ${req.session.visitcount}`);
+
+    res.render('pages/index', { pageTitle: 'Welcome' });
   });
 
-  //   router.get('/speakers', (req, res) => {
-  //     res.sendFile(path.join(__dirname, './static/speakers.html'));
-  //   });
-
-  router.use('/speakers', speakersRoute());
-  router.use('/feedback', feedbackRoute());
+  router.use('/speakers', speakersRoute(params));
+  router.use('/feedback', feedbackRoute(params));
 
   return router;
 };
